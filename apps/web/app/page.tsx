@@ -1,21 +1,24 @@
+"use client";
+
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@workspace/backend/_generated/api";
 import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
-import { add } from "@workspace/math/add";
-import { subtract } from "@workspace/math/subtract";
 
 export default function Page() {
+  const users = useQuery(api.users.getMany);
+  const addUser = useMutation(api.users.add);
+
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello app/web</h1>
-        <div className="flex gap-2">
-          <Button>Button</Button>
-          <Button variant="outline">Outline</Button>
-        </div>
-        <p>{add(2, 3)}</p>
-        <p>{subtract(5, 3)}</p>
-        <Input placeholder="Input" />
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-svh gap-4">
+      <h1 className="text-2xl font-bold">Hello app/web</h1>
+      <Button
+        onClick={() => {
+          addUser();
+        }}
+      >
+        Add User
+      </Button>
+      <div className="max-w-sm mx-auto w-full">{JSON.stringify(users)}</div>
     </div>
   );
 }
