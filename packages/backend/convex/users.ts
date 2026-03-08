@@ -22,6 +22,8 @@ export const add = mutation({
       throw new Error("No organization selected");
     }
 
+    throw new Error("Testing sentry");
+
     const userId = await ctx.db.insert("users", {
       name: "Mumin",
     });
