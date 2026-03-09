@@ -88,7 +88,7 @@ export const DashboardSidebar = () => {
                 appearance={{
                   elements: {
                     rootBox: "w-full! h-8!",
-                    avatarBox: "size-4! rounded-sm!",
+                    avatarBox: "size-6! rounded-sm!",
                     organizationSwitcherTrigger:
                       "w-full! justify-start! group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!",
                     organizationPreview:
@@ -115,6 +115,10 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
+                    className={cn(
+                      isActive(item.url) &&
+                        "bg-linear-to-b! from-sidebar-primary! to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]90!",
+                    )}
                     isActive={isActive(item.url)}
                     tooltip={item.title}
                   >
@@ -138,6 +142,10 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
+                    className={cn(
+                      isActive(item.url) &&
+                        "bg-linear-to-b! from-sidebar-primary! to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]90!",
+                    )}
                     isActive={isActive(item.url)}
                     tooltip={item.title}
                   >
@@ -161,6 +169,10 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
+                    className={cn(
+                      isActive(item.url) &&
+                        "bg-linear-to-b! from-sidebar-primary! to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]90!",
+                    )}
                     isActive={isActive(item.url)}
                     tooltip={item.title}
                   >
@@ -189,7 +201,7 @@ export const DashboardSidebar = () => {
                     "w-full! flex-row-reverse! justify-end! gap-2! group-data-[collapsible=icon]:justify-center! text-sidebar-foreground",
                   userButtonOuterIdentifier:
                     "pl-0! group-data-[collapsible=icon]:hidden!",
-                  avatarBox: "size-4!",
+                  avatarBox: "size-6!",
                 },
               }}
             />
