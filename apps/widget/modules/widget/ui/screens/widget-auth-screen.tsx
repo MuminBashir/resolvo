@@ -10,13 +10,15 @@ import {
 } from "@workspace/ui/components/form";
 import { Button } from "@workspace/ui/components/button";
 import { Input } from "@workspace/ui/components/input";
-import { WidgetHeader } from "../components/widget-header";
+import { WidgetHeader } from "@/modules/widget/ui/components/widget-header";
 import { useMutation } from "convex/react";
 import { api } from "@workspace/backend/_generated/api";
 import { Doc } from "@workspace/backend/_generated/dataModel";
-
-// Temporary hardcoded organization ID for demonstration purposes
-const organizationId = "org_123";
+import { useAtomValue, useSetAtom } from "jotai";
+import {
+  contactSessionIdAtomFamily,
+  organizationIdAtom,
+} from "@/modules/widget/atoms/widget-atoms";
 
 const formSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
@@ -24,6 +26,11 @@ const formSchema = z.object({
 });
 
 export const WidgetAuthScreen = () => {
+  const organizationId = useAtomValue(organizationIdAtom);
+  const setContactSessionId = useSetAtom(
+    contactSessionIdAtomFamily(organizationId || ""),
+  );
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,7 +68,7 @@ export const WidgetAuthScreen = () => {
         metaData,
       });
 
-      console.log("Contact session created with ID:", contactSessionId);
+      setContactSessionId(contactSessionId);
 
       return;
     } catch (error) {
